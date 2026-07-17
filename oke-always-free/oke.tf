@@ -9,7 +9,7 @@ resource "oci_containerengine_cluster" "oke_cluster" {
   kubernetes_version = var.kubernetes_version
   name               = var.cluster_name
   vcn_id             = oci_core_vcn.oke_vcn.id
-  type               = "BASIC" # Always Free Tier eligible (control plane is free)
+  type               = "BASIC_CLUSTER" # Always Free Tier eligible (control plane is free)
 
   endpoint_config {
     is_public_ip_enabled = true
