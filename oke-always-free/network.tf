@@ -94,7 +94,7 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
     }
   }
 
-  # Ingress: Allow worker nodes to reach Kubernetes API (port 12201)
+  # Ingress: Allow worker nodes to reach Kubernetes API (port 6443)
   ingress_security_rules {
     protocol    = "6"
     source      = "10.0.10.0/24" # Worker nodes subnet
@@ -102,6 +102,28 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
     tcp_options {
       min = 6443
       max = 6443
+    }
+  }
+
+  # Ingress: Allow worker nodes to reach OKE service (port 12201)
+  ingress_security_rules {
+    protocol    = "6"
+    source      = "10.0.10.0/24" # Worker nodes subnet
+    source_type = "CIDR_BLOCK"
+    tcp_options {
+      min = 12201
+      max = 12201
+    }
+  }
+
+  # Ingress: ICMP traffic from worker nodes
+  ingress_security_rules {
+    protocol    = "1" # ICMP
+    source      = "10.0.10.0/24"
+    source_type = "CIDR_BLOCK"
+    icmp_options {
+      type = 3
+      code = 4
     }
   }
 }
@@ -134,6 +156,28 @@ resource "oci_core_security_list" "worker_sec_list" {
     tcp_options {
       min = 10250
       max = 10250
+    }
+  }
+
+  # Ingress: Allow Kubernetes Control Plane to communicate on port 12201
+  ingress_security_rules {
+    protocol    = "6"
+    source      = "10.0.0.0/28" # API Endpoint subnet
+    source_type = "CIDR_BLOCK"
+    tcp_options {
+      min = 12201
+      max = 12201
+    }
+  }
+
+  # Ingress: ICMP traffic from API Endpoint subnet
+  ingress_security_rules {
+    protocol    = "1" # ICMP
+    source      = "10.0.0.0/28"
+    source_type = "CIDR_BLOCK"
+    icmp_options {
+      type = 3
+      code = 4
     }
   }
 
