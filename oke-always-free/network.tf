@@ -116,6 +116,13 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
     }
   }
 
+  # Ingress: Allow all protocols from the worker nodes subnet (essential for internal OKE communication)
+  ingress_security_rules {
+    protocol    = "all"
+    source      = "10.0.10.0/24"
+    source_type = "CIDR_BLOCK"
+  }
+
   # Ingress: ICMP traffic from worker nodes
   ingress_security_rules {
     protocol    = "1" # ICMP
@@ -175,6 +182,13 @@ resource "oci_core_security_list" "worker_sec_list" {
       min = 12201
       max = 12201
     }
+  }
+
+  # Ingress: Allow all protocols from the API Endpoint subnet (essential for internal OKE control plane commands)
+  ingress_security_rules {
+    protocol    = "all"
+    source      = "10.0.0.0/28"
+    source_type = "CIDR_BLOCK"
   }
 
   # Ingress: ICMP traffic from API Endpoint subnet
