@@ -37,7 +37,7 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
   cluster_id         = oci_containerengine_cluster.oke_cluster.id
   compartment_id     = var.compartment_ocid
   kubernetes_version = var.kubernetes_version
-  name               = "${var.cluster_name}-nodepool"
+  name               = "${var.cluster_name}-np"
   node_shape         = var.node_shape
 
   # Custom config for flexible shape (e.g. Ampere A1 ARM CPU)
