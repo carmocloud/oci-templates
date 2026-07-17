@@ -76,10 +76,17 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
   vcn_id         = oci_core_vcn.oke_vcn.id
   display_name   = "${var.cluster_name}-api-sec"
 
-  # Egress: Allow API endpoint to talk to worker nodes
+  # Egress: Allow API endpoint to talk to worker nodes (all protocols)
   egress_security_rules {
     destination      = "10.0.10.0/24" # Private worker subnet
-    protocol         = "6"            # TCP
+    protocol         = "all"
+    destination_type = "CIDR_BLOCK"
+  }
+
+  # Egress: Allow API endpoint to communicate with OCI Services and the Internet (essential for control plane orchestration)
+  egress_security_rules {
+    destination      = "0.0.0.0/0"
+    protocol         = "all"
     destination_type = "CIDR_BLOCK"
   }
 
@@ -127,6 +134,17 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
   ingress_security_rules {
     protocol    = "1" # ICMP
     source      = "10.0.10.0/24"
+    source_type = "CIDR_BLOCK"
+    icmp_options {
+      type = 3
+      code = 4
+    }
+  }
+
+  # Ingress: Path MTU discovery from anywhere (essential for public API endpoints)
+  ingress_security_rules {
+    protocol    = "1" # ICMP
+    source      = "0.0.0.0/0"
     source_type = "CIDR_BLOCK"
     icmp_options {
       type = 3
@@ -195,6 +213,17 @@ resource "oci_core_security_list" "worker_sec_list" {
   ingress_security_rules {
     protocol    = "1" # ICMP
     source      = "10.0.0.0/28"
+    source_type = "CIDR_BLOCK"
+    icmp_options {
+      type = 3
+      code = 4
+    }
+  }
+
+  # Ingress: Path MTU discovery from anywhere (essential for private nodes routing via NAT)
+  ingress_security_rules {
+    protocol    = "1" # ICMP
+    source      = "0.0.0.0/0"
     source_type = "CIDR_BLOCK"
     icmp_options {
       type = 3
