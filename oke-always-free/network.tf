@@ -141,6 +141,13 @@ resource "oci_core_security_list" "worker_sec_list" {
     destination_type = "CIDR_BLOCK"
   }
 
+  # Egress: Allow worker nodes to reach Oracle Services Network via Service Gateway
+  egress_security_rules {
+    destination      = data.oci_core_services.all_services.services[0].cidr_block
+    destination_type = "SERVICE_CIDR_BLOCK"
+    protocol         = "all"
+  }
+
   # Ingress: Allow intra-subnet traffic (K8s pod networking)
   ingress_security_rules {
     protocol    = "all"
