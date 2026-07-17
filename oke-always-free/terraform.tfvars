@@ -1,0 +1,6 @@
+tenancy_ocid     = "ocid1.tenancy.oc1..aaaaaaaaob2gt7lz5ogjg5dsvkem5jkcr7hlxylzbyef7h57bivsr76afnoa"
+compartment_ocid = "ocid1.tenancy.oc1..aaaaaaaaob2gt7lz5ogjg5dsvkem5jkcr7hlxylzbyef7h57bivsr76afnoa"
+region           = "sa-saopaulo-1"
+kubernetes_version = "v1.36.1"
+ssh_public_key   = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCzyX6VXt4Tejj75Dyp62Nm43EJFE4Xe3YMY6PA8ljVMMyQfae+KOlNkERg830EfFRJlLPWcYDmVhhcdGMJK53PzSyIEAhKLumxSEC+QED5Xt8k02urUNedAzBjUAs3iXw1ewLpGtdidTdXadXAUbdPXpDr31LzFcSUkqdOPMhd6POWXktmkD/TpYj4QzqzF9+3xo6NSvNaOYvqD9hqqdxfhHC6TuvS8ct2L7FBJxxkJxYDoLI1xigqOc4NaEIO7vACizvYlxHtcZz13PkMX+qgG2VBAupA/KOJit23Pmt3Kw2sYrq3yNQEo+Y/m6UztVLlDGepXIYo+eMqCBCOK1hdxMpHPyl4u+RXh5LOgcbnXrh+rQnPp/56qmcwiEFQI2Rnuz3HHO6hKgDvVaiIj/N6oavE5Yk9797J974kgXXIiNZaFl90FxTklxYkFLNuWp9UTkxjdU802T8pdw202J+d3cuR23fH4pV1jZvXOSrasgkqK2+QUL0ag9gudgr4ZjHxWxzOrlAPxbPFwDC49/VWi7aM6g+Acjv5gr6LDYls2PdvfMv9P/4MzFfzdtBTTDm0g2QQQsQnndR+WoWXkxmA2SkS9uhw96TozOpK3yjZWXcVGr0SQ3xLzaGaOhHFrozKvj0RjqkEqIQZPlACV15qeudZRupu3MxrHW6atqyXBw== robcarmof@gmail.com"
+node_image_id    = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaapjmt5wxgnog7352hlo4vy3f6hbxpdac3j6st362dmcgxrpeju7sq"

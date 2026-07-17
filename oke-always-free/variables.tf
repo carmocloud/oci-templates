@@ -3,20 +3,9 @@ variable "tenancy_ocid" {
   type        = string
 }
 
-variable "user_ocid" {
-  description = "The OCID of your OCI User"
+variable "compartment_ocid" {
+  description = "The OCID of the compartment where resources will be created"
   type        = string
-}
-
-variable "fingerprint" {
-  description = "The fingerprint of your API private key"
-  type        = string
-}
-
-variable "private_key_path" {
-  description = "The local path to your OCI API private key"
-  type        = string
-  default     = "~/.oci/sessions/CARMOCLOUD/oci_api_key.pem"
 }
 
 variable "region" {
@@ -25,9 +14,34 @@ variable "region" {
   default     = "sa-saopaulo-1"
 }
 
-variable "compartment_ocid" {
-  description = "The OCID of the compartment where resources will be created"
+variable "auth_type" {
+  description = "The type of authentication to use. Set to 'SecurityToken' for session token authentication (recommended), or leave blank for standard API key authentication."
   type        = string
+  default     = "SecurityToken"
+}
+
+variable "config_file_profile" {
+  description = "The profile name in your ~/.oci/config file to use for authentication"
+  type        = string
+  default     = "CARMOCLOUD"
+}
+
+variable "user_ocid" {
+  description = "The OCID of your OCI User (only needed for API key auth)"
+  type        = string
+  default     = null
+}
+
+variable "fingerprint" {
+  description = "The fingerprint of your API private key (only needed for API key auth)"
+  type        = string
+  default     = null
+}
+
+variable "private_key_path" {
+  description = "The local path to your OCI API private key (only needed for API key auth)"
+  type        = string
+  default     = null
 }
 
 variable "cluster_name" {
