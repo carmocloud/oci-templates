@@ -1,3 +1,17 @@
+# Terraform variables & secrets
+terraform.tfvars
+*.tfvars
+*.tfvars.json
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.pem
+*.key
+.env*
+!.env.example
+
+
 # Local terraform directories
 **/.terraform/*
 
